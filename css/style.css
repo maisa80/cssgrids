@@ -1,0 +1,137 @@
+
+[class*="container"] {
+    border: 1px solid #333;
+    height: 300px;
+    width: 600px;
+    display: grid;
+}
+
+/**
+ * Grids with specific positioning
+ */
+.container-1 {
+    grid-template-columns: [first] 40px [line2] 50px [line3] auto [col4-start] 50px [five] 40px [end];
+    grid-template-rows: [row1-start] 25% [row1-end] 100px [third-line] auto [last-line];
+}
+
+#item-a {
+    background-color: pink;
+    
+    grid-column-start: 2;
+    grid-column-end: five;
+    grid-row-start: 1;
+    grid-row-end: 3;
+}
+
+#item-b {
+    background-color: rgba(135, 206, 235, 0.5);
+    grid-column-start: 1;
+    grid-column-end: span col4-start;
+    grid-row-start: 2;
+    grid-row-end: span 2;
+}
+
+#item-c {
+    background-color: orange;
+
+    /* grid-column-start: 3;
+    grid-column-end: span 2;
+    grid-row-start: third-line;
+    grid-row-end: 4;  */
+
+    /** Short hand */
+    /* column-start / column-end */
+    /* grid-column: 3 / span 2; */
+    /* row-start / row-end */ 
+    /* grid-row: third-line / 4; */ 
+     
+
+    /** Short hand */
+    grid-area: third-line / 3 / 4 / span 2; /* row-start / column-start / row-end / column-end */
+}
+
+
+/**
+ * Grids without specific positioning
+ */
+
+.container-2 {
+    grid-template-columns: repeat(5, 80px); /* 1fr 1fr 1fr */
+    grid-template-rows: auto; /* default value*/
+
+    /* Positions horizontally */
+    justify-items: stretch;/* start | end | center | stretch (deafult);*/
+    /* Positions vertically */
+    align-items: stretch; /* start | end | center | stretch (deafult) ;*/
+    /* short-hand */
+    place-items: stretch stretch;/* <align-items> / <justify-items> */
+
+    /* Needs free available space to move around */
+    /* Positions column-wise */
+    justify-content: space-between; /* start | end | center | stretch (deafult)| space-around | space-between | space-evenly;*/
+    /* Positions row-wise */
+    align-content: space-around; /*start | end | center | stretch | space-around | space-between | space-evenly;*/
+    /* short-hand */
+    place-content: stretch stretch; /* <align-content> / <justify-content> */
+}
+
+[class*="box"] {
+    border: 1px solid #333;
+}
+
+.box8 {
+    justify-self: center; /* start | end | center | stretch;*/
+    align-self: center; /* start | end | center | stretch;*/
+    /* short-hand */
+    place-self: stretch stretch;/* <align-self> / <justify-self> */
+}
+
+
+/**
+ * Grid areas
+ */
+
+ /*
+To think about whne working with grid-template-areas:
+    1. Handle/manage all children in grid-template-areas
+    2. Must have same amount of values in alla rows
+    3. May only create figures with 4 corners, meaning cannot create for example L-shaped sections
+*/
+
+.container-3 {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto; /* default value */
+    grid-template-areas: 
+        "header header header header"
+        "content content content sidebar"
+        "footer footer footer footer"
+    ;
+
+
+    padding: 10px;
+    column-gap: 20px;
+    row-gap: 10px;
+    /* short-hand */
+    gap: 10px 20px; /* <grid-row-gap> <grid-column-gap> */
+}
+
+header {
+    background-color: tomato;
+    grid-area: header;
+}
+
+main {
+    background-color: wheat;
+    grid-area: content; 
+}
+
+aside {
+    background-color: lightcyan; 
+    grid-area: sidebar;
+}
+
+footer {
+    background-color: skyblue; 
+    grid-area: footer;
+}
+
